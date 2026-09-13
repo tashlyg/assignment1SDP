@@ -54,10 +54,10 @@ public class SmartFarm {
     }
 
     public static class Builder {
-        private String farmName;
-        private String cropType;
-        private double areaSizeHectares;
-        private Location location;
+        private final String farmName;
+        private final String cropType;
+        private final double areaSizeHectares;
+        private final Location location;
 
         private double targetTemperature = 22.0;
         private double targetHumidity = 60.0;
