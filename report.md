@@ -256,7 +256,7 @@ public Builder setTemperature(double degreesCelsius) {
 
 ## 8. Part G - UML Diagram
 
-![XLLDJX~1.PNG](../../Downloads/XLLDJX%7E1.PNG)
+exist
 
 ## 9. Part H - Automated Testing Summary
 
