@@ -43,7 +43,7 @@ public class SmartFarm {
                 "name='" + farmName + '\'' +
                 ", crop='" + cropType + '\'' +
                 ", area=" + areaSizeHectares + " ha" +
-                ", location=" + location +
+                ", "+ location +
                 ", temp=" + targetTemperature + "°C" +
                 ", humidity=" + targetHumidity + "%" +
                 ", autoIrrigation=" + autoIrrigation +
