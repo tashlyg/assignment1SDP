@@ -37,6 +37,22 @@ public class SmartFarm {
     public boolean isAiCropMonitoring() { return aiCropMonitoring; }
     public int getSensorUpdateIntervalMinutes() { return sensorUpdateIntervalMinutes; }
 
+    @Override
+    public String toString() {
+        return "SmartFarm{" +
+                "name='" + farmName + '\'' +
+                ", crop='" + cropType + '\'' +
+                ", area=" + areaSizeHectares + " ha" +
+                ", location=" + location +
+                ", temp=" + targetTemperature + "°C" +
+                ", humidity=" + targetHumidity + "%" +
+                ", autoIrrigation=" + autoIrrigation +
+                ", autoLighting=" + autoLighting +
+                ", aiMonitoring=" + aiCropMonitoring +
+                ", updateInterval=" + sensorUpdateIntervalMinutes + "m" +
+                '}';
+    }
+
     public static class Builder {
         private String farmName;
         private String cropType;
