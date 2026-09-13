@@ -3,7 +3,7 @@
 **Course:** Software Design Patterns  
 **Topic:** Builder Pattern: Design Under Changing Requirements  
 **Domain:** Smart Farm System  
-**Programming Language:** Java (JDK 17+)  
+**Programming Language:** Java
 
 ---
 
@@ -16,7 +16,7 @@ The selected domain for this project is a **Smart Farm System**. Modern automate
 * **Domain:** Smart Farm System
 * **Required Properties (4):**
   1. `farmName` (*String*) — Name/identifier of the smart farm.
-  2. `cropType` (*String*) — Primary crop cultivated (e.g., Tomatoes, Cucumbers).
+  2. `cropType` (*String*) — Primary crop cultivated.
   3. `areaSizeHectares` (*double*) — Farm physical area in hectares.
   4. `location` (*Location*) — Value object representing sector and greenhouse ID.
 * **Optional Properties (6):**
@@ -60,7 +60,7 @@ public SmartFarm(String farmName, String cropType, double areaSizeHectares, Loca
 
 ```java
 SmartFarm farm = new SmartFarm(
-    "Greenotech Alpha", "Tomatoes", 12.5, new Location("North", 101),
+    "Greenotech Alpha", "Tomatoes", 12.5, new Location("North", 67),
     24.5, 65.0, true, true, false, 30
 );
 
@@ -92,7 +92,7 @@ An explicit `Director` class was **omitted** to adhere to the Keep It Simple, St
 ### Fluent API & Construction Example
 
 ```java
-SmartFarm highTechFarm = new SmartFarm.Builder("Greenotech Alpha", "Tomatoes", 12.5, new Location("North", 101))
+SmartFarm highTechFarm = new SmartFarm.Builder("Greenotech Alpha", "Tomatoes", 12.5, new Location("North", 67))
         .applyHighTechPreset()
         .setTemperature(24.5)
         .build();
@@ -180,41 +180,7 @@ public Builder enableAutoIrrigation() {
 
 ---
 
-### Example 2: Single Responsibility Principle in Validation
-
-* **Before:**
-```java
-public SmartFarm build() {
-    if (farmName == null || farmName.isBlank()) throw new IllegalArgumentException();
-    if (areaSizeHectares <= 0) throw new IllegalArgumentException();
-    if (aiCropMonitoring && sensorUpdateIntervalMinutes > 15) throw new IllegalStateException();
-    return new SmartFarm(this);
-}
-
-```
-
-
-* **After:**
-```java
-public SmartFarm build() {
-    validate();
-    return new SmartFarm(this);
-}
-
-private void validate() {
-    validateSingleFields();
-    validateCrossFields();
-}
-
-```
-
-
-* **Clean Code Principle:** *Small Functions & Do One Thing.*
-* **Explanation:** Separating validation execution into dedicated helper methods (`validateSingleFields()` and `validateCrossFields()`) decouples object assembly from verification logic.
-
----
-
-### Example 3: Descriptive Naming & One Level of Abstraction
+### Example 2: Descriptive Naming & One Level of Abstraction
 
 * **Before:**
 ```java
@@ -228,8 +194,8 @@ public Builder temp(double t) {
 
 * **After:**
 ```java
-public Builder setTemperature(double degreesCelsius) {
-    this.targetTemperature = degreesCelsius;
+public Builder setTemperature(double temp) {
+    this.targetTemperature = temp;
     return this;
 }
 
@@ -260,20 +226,7 @@ public Builder setTemperature(double degreesCelsius) {
 
 ## 9. Part H - Automated Testing Summary
 
-Ten automated JUnit 5 tests were implemented in `src/test/java/smartfarm/SmartFarmTest.java`:
-
-1. **`testValidConstructionDefaultValues()`** — Asserts valid product creation using minimum required properties and default values.
-2. **`testValidConstructionWithPreset()`** — Verifies `applyHighTechPreset()` sets correct fields.
-3. **`testValidCustomConfiguration()`** — Tests full custom fluent chain configuration.
-4. **`testInvalidEmptyFarmName()`** — Asserts `IllegalArgumentException` thrown when farm name is blank.
-5. **`testInvalidNegativeAreaSize()`** — Asserts exception when area size is `<= 0`.
-6. **`testInvalidSensorIntervalBoundary()`** — Tests out-of-range sensor update interval values.
-7. **`testIndividualConstraintAiSensorInterval()`** — Verifies cross-field failure when `aiCropMonitoring=true` and interval is `> 15` min.
-8. **`testIndividualConstraintHumidityIrrigation()`** — Verifies cross-field failure when humidity `> 80%` without `autoIrrigation`.
-9. **`testBoundaryValuesForTemperatureAndHumidity()`** — Tests boundary conditions for environmental fields.
-10. **`testBuilderReuseIndependence()`** — Ensures modifying a Builder instance after calling `build()` does not alter previously generated `SmartFarm` instances.
-
----
+I don't have it
 
 ## 10. Sample Program Output
 
